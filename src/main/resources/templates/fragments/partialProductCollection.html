@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Cart Items</title>
+</head>
+<body>
+    <div th:fragment="partialProductCollection">
+        <hr />
+        <!--/*@thymesVar id="entry" type="com.amazoom.PartialProductCollection"*/-->
+        <p><b>Name: </b><span th:text="${entry.product.name}" /></p>
+        <p><b>Price: </b><span th:text="${#numbers.formatCurrency(entry.product.price)}" /></p>
+        <p><b>Quantity: </b><span th:text="${entry.quantity}" /></p>
+        <!--/*@thymesVar id="admin" type="java.lang.Boolean"*/-->
+        <!--/*@thymesVar id="cart" type="java.util.Optional<com.amazoom.Cart>"*/-->
+        <div style="display: inline-block; margin-left: 5px;" th:if="${(session.authenticated != null && session.authenticated.admin) || (cart != null)}">
+            <button th:onclick="'editCart(\'addTo\', '+${entry.product.id}+')'">+</button>
+            <label th:for="'quantity-'+${entry.product.id}" style="margin: revert;">
+                <button th:onclick="'editCart(\'removeFrom\', '+${entry.product.id}+')'">-</button>
+            </label>
+            <select th:if="${entry.quantity > 1}" th:id="'quantity-'+${entry.product.id}">
+                <option value="0">All</option>
+                <option th:each="i : ${#numbers.sequence(1, entry.quantity)}" th:value="${i}" th:text="${i}"/>
+            </select>
+        </div>
+    </div>
+</body>
+</html>

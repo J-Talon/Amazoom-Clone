@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="/order.js"></script>
+    <title th:inline="text">Order #[[${order.id}]]</title>
+</head>
+<body>
+    <th:block th:insert="~{fragments/header :: header}" />
+    <h2 th:inline="text">Order #[[${order.id}]]</h2>
+    <!--/*@thymesVar id="order" type="com.amazoom.Order"*/-->
+    <div th:each="entry : ${order.parts}">
+        <th:block th:insert="~{fragments/partialProductCollection :: partialProductCollection}" />
+    </div>
+    <hr />
+    <b>Total</b>: <p th:text="${#numbers.formatCurrency(order.total)}"></p>
+    <button th:onclick="'cancel('+${order.id}+')'">Cancel</button>
+    <th:block th:insert="~{fragments/footer :: footer}" />
+</body>
+</html>

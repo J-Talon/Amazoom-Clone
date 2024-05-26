@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title th:inline="text">User #[[${user.username}]]</title>
+    <link rel="stylesheet" href="/editable.css"/>
+</head>
+<body>
+    <th:block th:insert="~{fragments/header :: header}"/>
+    <h2 th:inline="text">User #[[${user.username}]]</h2>
+    <p><b>Username: </b><span id="username" th:text="${user.username}" /></p>
+    <p><b>Name: </b><span th:text="${user.name}" /></p>
+    <p><b>Address: </b><span th:text="${user.address}" /></p>
+    <div class="container" th:if="${session.authenticated != null && (session.authenticated.admin || user.username.equals(session.authenticated.username))}">
+        <button th:if="${session.authenticated.admin}" onclick="window.location.href='/cart'+window.location.search">Cart</button>
+        <button onclick="window.location.href='/user/editor?username='+document.getElementById('username').innerText">Edit</button>
+        <button onclick="window.location.href='/user/delete?username='+document.getElementById('username').innerText">Delete</button>
+    </div>
+    <th:block th:insert="~{fragments/footer :: footer}"/>
+</body>
+</html>

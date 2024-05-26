@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Header</title>
+</head>
+<body>
+    <div th:fragment="header">
+        <link rel="stylesheet" href="/global.css">
+        <a href="/" style="text-decoration: none;"><h1>AmaZoom</h1></a>
+        <nav style="margin-top: 15px;">
+            <a href="/">Search</a> |
+            <a href="/products">Product Catalogue</a> |
+            <span th:if="${session.authenticated != null}">
+                <a href="/cart">Cart</a> | </span>
+            <span th:if="${session.authenticated != null}">
+                <a href="/orders">Orders</a> |
+                <a href="/user">My Profile</a> | </span>
+            <span th:if="${session.authenticated != null && session.authenticated.admin}">
+                <a href="/users">User List</a> | </span>
+            <a href="/login" th:if="${session.authenticated == null}">Login</a>
+            <a href="/logout" th:if="${session.authenticated != null}">Logout</a>
+        </nav>
+        <hr />
+    </div>
+</body>
+</html>

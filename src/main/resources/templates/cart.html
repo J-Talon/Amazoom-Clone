@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Cart</title>
+    <script src="/editCart.js"></script>
+</head>
+<body>
+    <th:block th:insert="~{fragments/header :: header}" />
+    <h2>Cart</h2>
+    <!--/*@thymesVar id="cart" type="com.amazoom.Cart"*/-->
+    <p th:if="${cart.parts.isEmpty()}" th:inline="text">
+        [[${session.authenticated != null && session.authenticated.username == cart.username ? 'Your ' : 'This '}]]
+        cart is empty.
+    </p>
+    <div th:if="${!cart.parts.isEmpty()}">
+        <div th:each="entry : ${cart.parts}">
+            <th:block th:insert="~{fragments/partialProductCollection :: partialProductCollection}" />
+        </div>
+        <hr />
+        <b>Total</b>: <p th:text="${#numbers.formatCurrency(cart.total)}"></p>
+        <button onclick="window.location.href='/checkout'+window.location.search">Checkout</button>
+    </div>
+    <th:block th:insert="~{fragments/footer :: footer}" />
+</body>
+</html>

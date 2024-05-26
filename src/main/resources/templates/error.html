@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Error</title>
+</head>
+<body>
+    <th:block th:insert="~{fragments/header :: header}" />
+    <h2>Error</h2>
+    <!--/*@thymesVar id="error" type="java.lang.String"*/-->
+    <p th:text="${error}"></p>
+    <th:block th:insert="~{fragments/footer :: footer}" />
+</body>
+</html>

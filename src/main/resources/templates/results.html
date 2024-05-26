@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Search Results</title>
+</head>
+<body>
+    <th:block th:insert="~{fragments/header :: header}" />
+    <h2>Search Results</h2>
+    <!--/*@thymesVar id="results" type="java.util.List<com.amazoom.Product>"*/-->
+    <table th:if="${!results.isEmpty()}">
+        <tr th:each="result : ${results}">
+            <!--/*@thymesVar id="result" type="com.amazoom.Product"*/-->
+            <td th:inline="text">
+                <a th:href="'/product?id='+${result.id}">[[${result.name}]]</a>
+            </td>
+            <td th:text="${#numbers.formatCurrency(result.price)}" />
+        </tr>
+    </table>
+    <p th:if="${results.isEmpty()}">No results found.</p>
+    <th:block th:insert="~{fragments/footer :: footer}" />
+</body>
+</html>

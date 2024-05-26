@@ -1,0 +1,24 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f8f8ff;
+    border: 5px solid #319177;
+    padding: 10px;
+    width: 50%;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    width: -webkit-fill-available;
+    width: -moz-available;
+    width: fill-available;
+    justify-content: space-between;
+}

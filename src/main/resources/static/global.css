@@ -1,0 +1,55 @@
+h1{
+    color: #f8f8ff;
+    background-color: #004953;
+    font-family: american typewriter, sans-serif;
+    padding: 20px;
+    font-size: 48px;
+    margin: -10px;
+}
+
+h2,h3{
+    /* color: #f8f8ff; */
+    font-family: american typewriter, sans-serif;
+}
+
+body{
+    /* background-color: #004953; */
+    font-family: didot, sans-serif;
+    margin: 10px;
+}
+
+details{
+    margin: 20px;
+}
+
+summary{
+    margin: 20px;
+    font-size: 24px;
+}
+
+button{
+    background-color: #319177;
+    margin: 10px;
+    border: 1px solid #319177;
+    cursor: pointer;
+    color: white;
+    width: 40%;
+    padding: 10px;
+}
+
+input[type = text], input[type = password], input[type = number]{
+    width: 90%;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #319177;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+label{
+    margin: 20px;
+}
+
+button:hover{
+    opacity: 0.8;
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/orders.css" />
+    <title>Orders</title>
+</head>
+<body>
+    <th:block th:insert="~{fragments/header :: header}" />
+    <h2 th:if="${session.authenticated != null && session.authenticated.username == username}">Your Orders</h2>
+    <h2 th:unless="${session.authenticated != null && session.authenticated.username == username}">Orders for #[[${username}]]</h2>
+    <div th:if="${session.authenticated != null && session.authenticated.admin}" style="display: flex;">
+        <label for="username">View orders for: </label>
+        <input style="flex-grow: 2; width: auto;" type="text" id="username" placeholder="username" />
+        <button onclick="window.location.href='/orders?username='+document.getElementById('username').value">Go</button>
+    </div>
+    <p th:if="${orders == null || orders.isEmpty()}">No orders found</p>
+    <ul th:unless="${orders == null || orders.isEmpty()}">
+        <li th:each="order : ${orders}">
+            <a th:href="'/order?id='+${order.id}" th:text="'Order #'+${order.id}"/>
+        </li>
+    </ul>
+    <th:block th:insert="~{fragments/footer :: footer}" />
+</body>
+</html>

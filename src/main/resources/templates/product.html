@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<!--/*@thymesVar id="product" type="com.amazoom.Product"*/-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="${product.name}+' Info'" />
+    <script src="/editCart.js"></script>
+</head>
+<body>
+    <th:block th:insert="~{fragments/header :: header}" />
+    <link rel="stylesheet" href="/editable.css" />
+    <h2 th:text="${product.name}+' Info'"></h2>
+    <p><b>Name: </b><span th:text="${product.name}" /></p>
+    <p><b>Price: </b><span th:text="${#numbers.formatCurrency(product.price)}" /></p>
+    <br />
+    <!--/*@thymesVar id="admin" type="java.lang.Boolean"*/-->
+    <div class="container">
+        <label th:for="'quantity-'+${product.id}">Quantity:</label>
+        <input type="number" th:id="'quantity-'+${product.id}" min="1" max="100" value="1">
+        <label th:if="${session.authenticated != null && session.authenticated.admin}" for="username">User:</label>
+        <input th:if="${session.authenticated != null && session.authenticated.admin}" type="text" id="username" th:value="${session.authenticated.username}">
+        <button th:onclick="'editCart(\'addTo\', ' + ${product.id} + ')'">Add To Cart</button>
+    </div>
+    <button th:if="${session.authenticated != null && session.authenticated.admin}" th:onclick="'window.location.href=\'/product/editor?id='+${product.id}+'\''">Edit Product</button>
+    <button th:if="${session.authenticated != null && session.authenticated.admin}" th:onclick="'window.location.href=\'/product/delete?id='+${product.id}+'\''">Delete Product</button>
+    <th:block th:insert="~{fragments/footer :: footer}" />
+</body>
+</html>

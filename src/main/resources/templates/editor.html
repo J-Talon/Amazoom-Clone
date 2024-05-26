@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Editor</title>
+    <script src="/edit.js"></script>
+</head>
+<body>
+    <th:block th:insert="~{fragments/header :: header}" />
+    <h2>Editor</h2>
+    <div id="fields">
+        <!--/*@thymesVar id="triples" type="java.util.List<com.amazoom.EditInfo>"*/-->
+        <div th:each="triple : ${triples}" style="display: flex;">
+            <!--/*@thymesVar id="triple" type="com.amazoom.EditInfo"*/-->
+            <label th:for="${triple.field()}" th:text="${triple.field().substring(0,1).toUpperCase() + triple.field().substring(1).toLowerCase()}" />
+            <input style="width: revert; flex-grow: 1;" type="text" th:readonly="${!triple.modifiable()}" th:id="${triple.field()}" th:value="${triple.value()}" />
+        </div>
+    </div>
+    <button th:data-id="${id}" onclick="edit(null, this)">Submit Changes</button>
+    <th:block th:insert="~{fragments/footer :: footer}" />
+</body>
+</html>

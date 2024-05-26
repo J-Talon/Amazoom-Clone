@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Search</title>
+    <script src="/search.js"></script>
+</head>
+<body>
+    <th:block th:insert="~{fragments/header :: header}" />
+        <div>
+            <label for="term">Search: </label>
+            <input type="text" id="term" />
+            <br />
+            <label for="by" th:if="${session.authenticated != null && session.authenticated.admin}">By: </label>
+            <!--/*@thymesVar id="admin" type="java.lang.Boolean"*/-->
+            <select id="by" th:if="${session.authenticated != null && session.authenticated.admin}">
+                <option value="name">Name</option>
+                <option value="ID">ID</option>
+            </select>
+            <label for="sortBy">Sort by: </label>
+            <select id="sortBy">
+                <option value="name">Name</option>
+                <option value="price">Price</option>
+            </select>
+            <label for="direction">Sort direction: </label>
+            <select id="direction">
+                <option value="asc">Ascending</option>
+                <option value="dsc">Descending</option>
+            </select>
+            <button th:onclick="'search('+${admin}+')'">Search</button>
+        </div>
+    <th:block th:insert="~{fragments/footer :: footer}" />
+</body>
+</html>
